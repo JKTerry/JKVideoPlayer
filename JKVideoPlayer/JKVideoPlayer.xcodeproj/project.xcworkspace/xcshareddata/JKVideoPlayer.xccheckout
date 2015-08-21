@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5646CE83-C94A-44A2-93C5-A192B1872E24</string>
+	<key>IDESourceControlProjectName</key>
+	<string>JKVideoPlayer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>46B2A661A2CB2F25F177FB52E39673B92246BCAC</key>
+		<string>https://github.com/JKTerry/JKVideoPlayer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>JKVideoPlayer/JKVideoPlayer.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>46B2A661A2CB2F25F177FB52E39673B92246BCAC</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JKTerry/JKVideoPlayer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>46B2A661A2CB2F25F177FB52E39673B92246BCAC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>46B2A661A2CB2F25F177FB52E39673B92246BCAC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JKVideoPlayer</string>
+		</dict>
+	</array>
+</dict>
+</plist>

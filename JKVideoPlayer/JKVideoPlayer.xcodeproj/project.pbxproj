@@ -14,6 +14,7 @@
 		046236DC1B84893500BED99B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 046236DB1B84893500BED99B /* Images.xcassets */; };
 		046236DF1B84893500BED99B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046236DD1B84893500BED99B /* LaunchScreen.xib */; };
 		046236EB1B84893600BED99B /* JKVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 046236EA1B84893600BED99B /* JKVideoPlayerTests.m */; };
+		048BA9CC1B86C87B002300F1 /* JKVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048BA9CB1B86C87B002300F1 /* JKVideoPlayerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		046236E41B84893600BED99B /* JKVideoPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JKVideoPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		046236E91B84893600BED99B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		046236EA1B84893600BED99B /* JKVideoPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKVideoPlayerTests.m; sourceTree = "<group>"; };
+		048BA9CA1B86C87B002300F1 /* JKVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKVideoPlayerView.h; sourceTree = "<group>"; };
+		048BA9CB1B86C87B002300F1 /* JKVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKVideoPlayerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 		046236CD1B84893500BED99B /* JKVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				048BA9C91B86C87B002300F1 /* JKVideoPlayer */,
 				046236D21B84893500BED99B /* AppDelegate.h */,
 				046236D31B84893500BED99B /* AppDelegate.m */,
 				046236D51B84893500BED99B /* ViewController.h */,
@@ -117,6 +121,15 @@
 				046236E91B84893600BED99B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		048BA9C91B86C87B002300F1 /* JKVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				048BA9CA1B86C87B002300F1 /* JKVideoPlayerView.h */,
+				048BA9CB1B86C87B002300F1 /* JKVideoPlayerView.m */,
+			);
+			path = JKVideoPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +234,7 @@
 			files = (
 				046236D71B84893500BED99B /* ViewController.m in Sources */,
 				046236D41B84893500BED99B /* AppDelegate.m in Sources */,
+				048BA9CC1B86C87B002300F1 /* JKVideoPlayerView.m in Sources */,
 				046236D11B84893500BED99B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +432,7 @@
 				046236F01B84893600BED99B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		046236F11B84893600BED99B /* Build configuration list for PBXNativeTarget "JKVideoPlayerTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +441,7 @@
 				046236F31B84893600BED99B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

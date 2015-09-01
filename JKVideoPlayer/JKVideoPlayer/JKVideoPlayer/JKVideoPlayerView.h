@@ -9,17 +9,27 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+typedef NS_ENUM(NSUInteger, VideoFillMode)
+{
+    VideoFillModeResizeAspect,
+    VideoFillModeResizeAspectFill,
+    VideoFillModeResize
+};
+
 @class AVPlayer;
 @class JKVideoPlayerView;
 
 @protocol VideoPlayerViewDelegate <NSObject>
 
 @optional
+- (void) videoPlayerViewShouldShowLoadingIndicator:(JKVideoPlayerView *)videoPlayerView;
+- (void) videoPlayerViewShouldHideLoadingIndicator:(JKVideoPlayerView *)videoPlayerView;
 - (void) videoPlayerViewIsReadyToPlayVideo:(JKVideoPlayerView *)videoPlayerView;
 - (void) videoPlayerViewDidReachEnd:(JKVideoPlayerView *)videoPlayerView;
 - (void) videoPlayerView:(JKVideoPlayerView *)videoPlayerView timeDidChange:(CMTime)cmTime;
 - (void) videoPlayerView:(JKVideoPlayerView *)videoPlayerView loadedTimeRangeDidChange:(float)duration;
 - (void) videoPlayerView:(JKVideoPlayerView *)videoPlayerView didFailWithError:(NSError *)error;
+- (void) videoPlayerViewNetworkNotBest:(JKVideoPlayerView *)videoPlayerView;
 
 @end
 
@@ -27,21 +37,17 @@
 
 @property (nonatomic, weak) id<VideoPlayerViewDelegate> delegate;
 
-@property (nonatomic, assign, getter=isPlaying) BOOL playing;
+@property (nonatomic, assign, getter = isPlaying) BOOL playing;
 /* defaults is YES */
-@property (nonatomic, assign, getter=isLooping) BOOL looping;
+@property (nonatomic, assign, getter = isLooping) BOOL looping;
 /* defaults is NO */
-@property (nonatomic, assign, getter=isMuted) BOOL muted;
+@property (nonatomic, assign, getter = isMuted) BOOL muted;
+/* 设置填充模式 */
+@property (nonatomic, assign) VideoFillMode videoFillMode;
+/* 设置视频资源地址 */
+@property (nonatomic, assign) NSURL *videoURL;
+@property (nonatomic, strong) AVPlayer *player;
 
-/* 设置填充模式
- * AVLayerVideoGravityResizeAspect,
- * AVLayerVideoGravityResizeAspectFill
- * AVLayerVideoGravityResize.
- * AVLayerVideoGravityResizeAspect is default.
- */
-- (void) setVideoFillMode:(NSString *)fillMode;
-
-- (void) setURL:(NSURL *)URL;
 - (void) setPlayerItem:(AVPlayerItem *)playerItem;
 - (void) setAsset:(AVAsset *)asset;
 
@@ -55,10 +61,6 @@
 - (void) enableAirplay;
 - (void) disableAirplay;
 - (BOOL) isAirplayEnabled;
-
-//Time Updates
-- (void) enableTimeUpdates;
-- (void) disableTimeUpdates;
 
 //Scrubbing
 - (void) startScrubbing;

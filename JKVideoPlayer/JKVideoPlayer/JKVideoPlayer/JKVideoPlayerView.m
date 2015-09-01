@@ -8,6 +8,12 @@
 
 #import "JKVideoPlayerView.h"
 
+#define __OPTIMIZE__
+#ifndef __OPTIMIZE__
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) {}
+#endif
 static const float DefaultPlayableBufferLength = 2.0f;
 static const float DefaultVolumeFadeDuration = 1.0f;
 static const float TimeObserverInterval = 0.01f;
@@ -23,7 +29,6 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
 
 @interface JKVideoPlayerView()
 
-@property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, assign, getter=isScrubbing) BOOL scrubbing;
 @property (nonatomic, assign, getter=isSeeking) BOOL seeking;
 @property (nonatomic, assign) BOOL isAtEndTime;
@@ -35,6 +40,10 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
 @property (nonatomic, assign) BOOL isTimingUpdateEnabled;
 @property (nonatomic, strong) id timeObserverToken;
 
+//Time Updates
+- (void) enableTimeUpdates;
+- (void) disableTimeUpdates;
+
 @end
 
 @implementation JKVideoPlayerView
@@ -42,12 +51,18 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
 #pragma mark - dealloc
 - (void) dealloc
 {
+    [self clearPlayer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"dealloc:%@",self);
+}
+
+- (void) clearPlayer
+{
     [self resetPlayerItemIfNecessary];
     [self removePlayerObservers];
     [self removeTimeObserver];
     [self cancelFadeVolume];
     [self detachPlayer];
-    NSLog(@"dealloc:%@",self);
 }
 
 #pragma mark - Public Methods
@@ -56,13 +71,35 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
     return [AVPlayerLayer class];
 }
 
-- (void) setVideoFillMode:(NSString *)fillMode
+- (void) setVideoFillMode:(VideoFillMode)fillMode
 {
     AVPlayerLayer *playerLayer = (AVPlayerLayer *)[self layer];
-    playerLayer.videoGravity = fillMode;
+    NSString *videoGravity = AVLayerVideoGravityResizeAspect;
+    switch (fillMode)
+    {
+        case VideoFillModeResize:
+        {
+            videoGravity = AVLayerVideoGravityResize;
+            break;
+        }
+        case VideoFillModeResizeAspect:
+        {
+            videoGravity = AVLayerVideoGravityResizeAspect;
+            break;
+        }
+        case VideoFillModeResizeAspectFill:
+        {
+            videoGravity = AVLayerVideoGravityResizeAspectFill;
+            break;
+        }
+            
+        default:
+            break;
+    }
+    playerLayer.videoGravity = videoGravity;
 }
 
-- (void) setURL:(NSURL *)URL
+- (void) setVideoURL:(NSURL *)URL
 {
     if (URL == nil)
     {
@@ -210,6 +247,7 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
         self.shouldPlayAfterScrubbing = YES;
         [self pause];
     }
+    [self disableTimeUpdates];
 }
 
 - (void) scrub:(float)time
@@ -230,6 +268,7 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
         self.shouldPlayAfterScrubbing = NO;
     }
     self.scrubbing = NO;
+    [self enableTimeUpdates];
 }
 
 #pragma mark - Time Updates
@@ -576,22 +615,39 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
 {
     if (context == VideoPlayer_PlayerRateChangedContext)
     {
+        NSLog(@"播放速率发生改变,当前速率为%.2f",self.player.rate);
         if (self.isScrubbing == NO && self.isPlaying && self.player.rate == 0.0f)
         {
             //TODO: Show loading indicator
+            if ([self.delegate respondsToSelector:@selector(videoPlayerViewShouldShowLoadingIndicator:)])
+            {
+                [self.delegate videoPlayerViewShouldShowLoadingIndicator:self];
+            }
+        }
+        if (self.player.rate != 0.0f)
+        {
+            if ([self.delegate respondsToSelector:@selector(videoPlayerViewShouldHideLoadingIndicator:)])
+            {
+                [self.delegate videoPlayerViewShouldHideLoadingIndicator:self];
+            }
         }
     }
     else if (context == VideoPlayer_PlayerItemStatusContext)
     {
+        if ([self.delegate respondsToSelector:@selector(videoPlayerViewShouldHideLoadingIndicator:)])
+        {
+            [self.delegate videoPlayerViewShouldHideLoadingIndicator:self];
+        }
         AVPlayerStatus newStatus = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
         AVPlayerStatus oldStatus = [[change objectForKey:NSKeyValueChangeOldKey] integerValue];
+        NSLog(@"播放状态发生改变,当前状态:%ld",(long)newStatus);
         if (newStatus != oldStatus)
         {
             switch (newStatus)
             {
                 case AVPlayerStatusUnknown:
                 {
-                    NSLog(@"Video playerStatus Unknown");
+                    NSLog(@"Video player status unknown");
                     break;
                 }
                 case AVPlayerStatusReadyToPlay:
@@ -633,7 +689,6 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
                     }
                     break;
                 }
-                    
                 default:
                     break;
             }
@@ -641,19 +696,29 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
     }
     else if (context == VideoPlayer_PlayerItemPlaybackBufferEmpty)
     {
+        NSLog(@"播放的buffer 是否为空:%d",self.player.currentItem.playbackBufferEmpty);
         if (self.player.currentItem.playbackBufferEmpty)
         {
             if (self.isPlaying)
             {
                 //TODO : show Loading indicator
+                if ([self.delegate respondsToSelector:@selector(videoPlayerViewShouldShowLoadingIndicator:)])
+                {
+                    [self.delegate videoPlayerViewShouldShowLoadingIndicator:self];
+                }
             }
         }
     }
     else if (context == VideoPlayer_PlayerItemPlaybackLikelyToKeepUp)
     {
+        NSLog(@"playbackLikelyToKeepUp %d:",self.player.currentItem.playbackLikelyToKeepUp);
         if (self.player.currentItem.playbackLikelyToKeepUp)
         {
             //TODO : hide loading indicator
+            if ([self.delegate respondsToSelector:@selector(videoPlayerViewShouldHideLoadingIndicator:)])
+            {
+                [self.delegate videoPlayerViewShouldHideLoadingIndicator:self];
+            }
             
             if (self.isScrubbing == NO && self.isPlaying && self.player.rate == 0.0f)
             {
@@ -664,16 +729,24 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
     else if (context == VideoPlayer_PlayerItemLoadedTimeRangesContext)
     {
         float loadedDuration = [self calcLoadedDuration];
+        NSLog(@"PlayerItemLoadedTime loadedDuration:%.2f xxx:%.2f",loadedDuration, CMTimeGetSeconds(self.player.currentTime) + self.playableBufferLength);
         if (self.isScrubbing == NO && self.isPlaying && self.player.rate == 0.0f)
         {
             if (loadedDuration >= CMTimeGetSeconds(self.player.currentTime) + self.playableBufferLength)
             {
                 self.playableBufferLength *= 2;
-                if (self.playableBufferLength > 64)
+                if (self.playableBufferLength > 32)
                 {
-                    self.playableBufferLength = 64;
+                    self.playableBufferLength = 32;
                 }
                 [self play];
+            }
+            else
+            {
+                if ([self.delegate respondsToSelector:@selector(videoPlayerViewNetworkNotBest:)])
+                {
+                    [self.delegate videoPlayerViewNetworkNotBest:self];
+                }
             }
         }
         
@@ -691,7 +764,6 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
-
 
 #pragma mark - init
 - (instancetype) initWithFrame:(CGRect)frame
@@ -714,6 +786,7 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
 
 - (void) commonInit
 {
+    self.backgroundColor = [UIColor blackColor];
     _volumeFadeDuration = DefaultVolumeFadeDuration;
     _playableBufferLength = DefaultPlayableBufferLength;
     [self setupPlayer];
@@ -723,6 +796,7 @@ static void *VideoPlayer_PlayerItemLoadedTimeRangesContext = &VideoPlayer_Player
     self.muted = NO;
     self.looping = YES;
     [self attachPlayer];
+    [self enableTimeUpdates];
 }
 
 #pragma mark - Player

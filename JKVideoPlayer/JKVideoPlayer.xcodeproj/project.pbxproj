@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045DB6B21B9436580064FA8C /* btn_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045DB6B11B9436580064FA8C /* btn_play@2x.png */; };
 		046236D11B84893500BED99B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 046236D01B84893500BED99B /* main.m */; };
 		046236D41B84893500BED99B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 046236D31B84893500BED99B /* AppDelegate.m */; };
 		046236D71B84893500BED99B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046236D61B84893500BED99B /* ViewController.m */; };
@@ -14,6 +15,12 @@
 		046236DC1B84893500BED99B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 046236DB1B84893500BED99B /* Images.xcassets */; };
 		046236DF1B84893500BED99B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046236DD1B84893500BED99B /* LaunchScreen.xib */; };
 		046236EB1B84893600BED99B /* JKVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 046236EA1B84893600BED99B /* JKVideoPlayerTests.m */; };
+		0465A47D1B901E330034837C /* BottomControllView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465A47C1B901E330034837C /* BottomControllView.m */; };
+		0465A4801B901E440034837C /* TopControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465A47F1B901E440034837C /* TopControlView.m */; };
+		0470543D1B8EBF2900DCE46A /* PlayerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470543C1B8EBF2900DCE46A /* PlayerTableViewController.m */; };
+		047054401B8F049E00DCE46A /* ControlledVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470543F1B8F049E00DCE46A /* ControlledVideoPlayerView.m */; };
+		047B6DD91B955130009D838B /* btn_loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047B6DD81B955130009D838B /* btn_loading@2x.png */; };
+		047B6DDB1B958B02009D838B /* videoplayerDefaultImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047B6DDA1B958B02009D838B /* videoplayerDefaultImage@2x.png */; };
 		048BA9CC1B86C87B002300F1 /* JKVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048BA9CB1B86C87B002300F1 /* JKVideoPlayerView.m */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		045DB6B11B9436580064FA8C /* btn_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_play@2x.png"; sourceTree = "<group>"; };
 		046236CB1B84893500BED99B /* JKVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JKVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		046236CF1B84893500BED99B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		046236D01B84893500BED99B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -41,6 +49,16 @@
 		046236E41B84893600BED99B /* JKVideoPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JKVideoPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		046236E91B84893600BED99B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		046236EA1B84893600BED99B /* JKVideoPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKVideoPlayerTests.m; sourceTree = "<group>"; };
+		0465A47B1B901E330034837C /* BottomControllView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomControllView.h; sourceTree = "<group>"; };
+		0465A47C1B901E330034837C /* BottomControllView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomControllView.m; sourceTree = "<group>"; };
+		0465A47E1B901E440034837C /* TopControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopControlView.h; sourceTree = "<group>"; };
+		0465A47F1B901E440034837C /* TopControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopControlView.m; sourceTree = "<group>"; };
+		0470543B1B8EBF2900DCE46A /* PlayerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTableViewController.h; sourceTree = "<group>"; };
+		0470543C1B8EBF2900DCE46A /* PlayerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTableViewController.m; sourceTree = "<group>"; };
+		0470543E1B8F049E00DCE46A /* ControlledVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlledVideoPlayerView.h; sourceTree = "<group>"; };
+		0470543F1B8F049E00DCE46A /* ControlledVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlledVideoPlayerView.m; sourceTree = "<group>"; };
+		047B6DD81B955130009D838B /* btn_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_loading@2x.png"; sourceTree = "<group>"; };
+		047B6DDA1B958B02009D838B /* videoplayerDefaultImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videoplayerDefaultImage@2x.png"; sourceTree = "<group>"; };
 		048BA9CA1B86C87B002300F1 /* JKVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKVideoPlayerView.h; sourceTree = "<group>"; };
 		048BA9CB1B86C87B002300F1 /* JKVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKVideoPlayerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +81,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		045DB6B01B94364F0064FA8C /* playerImageResources */ = {
+			isa = PBXGroup;
+			children = (
+				045DB6B11B9436580064FA8C /* btn_play@2x.png */,
+				047B6DD81B955130009D838B /* btn_loading@2x.png */,
+				047B6DDA1B958B02009D838B /* videoplayerDefaultImage@2x.png */,
+			);
+			path = playerImageResources;
+			sourceTree = "<group>";
+		};
 		046236C21B84893500BED99B = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +115,8 @@
 				048BA9C91B86C87B002300F1 /* JKVideoPlayer */,
 				046236D21B84893500BED99B /* AppDelegate.h */,
 				046236D31B84893500BED99B /* AppDelegate.m */,
+				0470543B1B8EBF2900DCE46A /* PlayerTableViewController.h */,
+				0470543C1B8EBF2900DCE46A /* PlayerTableViewController.m */,
 				046236D51B84893500BED99B /* ViewController.h */,
 				046236D61B84893500BED99B /* ViewController.m */,
 				046236D81B84893500BED99B /* Main.storyboard */,
@@ -126,8 +156,15 @@
 		048BA9C91B86C87B002300F1 /* JKVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				045DB6B01B94364F0064FA8C /* playerImageResources */,
 				048BA9CA1B86C87B002300F1 /* JKVideoPlayerView.h */,
 				048BA9CB1B86C87B002300F1 /* JKVideoPlayerView.m */,
+				0470543E1B8F049E00DCE46A /* ControlledVideoPlayerView.h */,
+				0470543F1B8F049E00DCE46A /* ControlledVideoPlayerView.m */,
+				0465A47B1B901E330034837C /* BottomControllView.h */,
+				0465A47C1B901E330034837C /* BottomControllView.m */,
+				0465A47E1B901E440034837C /* TopControlView.h */,
+				0465A47F1B901E440034837C /* TopControlView.m */,
 			);
 			path = JKVideoPlayer;
 			sourceTree = "<group>";
@@ -212,9 +249,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				045DB6B21B9436580064FA8C /* btn_play@2x.png in Resources */,
+				047B6DDB1B958B02009D838B /* videoplayerDefaultImage@2x.png in Resources */,
 				046236DA1B84893500BED99B /* Main.storyboard in Resources */,
 				046236DF1B84893500BED99B /* LaunchScreen.xib in Resources */,
 				046236DC1B84893500BED99B /* Images.xcassets in Resources */,
+				047B6DD91B955130009D838B /* btn_loading@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,10 +272,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0470543D1B8EBF2900DCE46A /* PlayerTableViewController.m in Sources */,
 				046236D71B84893500BED99B /* ViewController.m in Sources */,
+				0465A4801B901E440034837C /* TopControlView.m in Sources */,
 				046236D41B84893500BED99B /* AppDelegate.m in Sources */,
+				0465A47D1B901E330034837C /* BottomControllView.m in Sources */,
 				048BA9CC1B86C87B002300F1 /* JKVideoPlayerView.m in Sources */,
 				046236D11B84893500BED99B /* main.m in Sources */,
+				047054401B8F049E00DCE46A /* ControlledVideoPlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,7 +407,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = JKVideoPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -373,7 +419,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = JKVideoPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
